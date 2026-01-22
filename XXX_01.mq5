@@ -3,11 +3,11 @@
 #property indicator_buffers 3
 #property indicator_plots   3
 
-// Include file App (Lưu ý đường dẫn vào folder 4_App)
+// Include file App 
 #include "Include_IC\4_App\RangeApp.mqh"
 
 // --- INPUTS ---
-input int InpPeriod = 20; // Chu kỳ Range
+input int InpPeriod = 20; 
 
 // --- OBJECT ---
 CRangeApp app;

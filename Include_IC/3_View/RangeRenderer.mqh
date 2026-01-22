@@ -8,32 +8,32 @@ public:
    double BuffArrow[]; 
 
    void Initialize() {
-      // Gắn Buffer
+      //  Buffer
       SetIndexBuffer(0, BuffHigh, INDICATOR_DATA);
       SetIndexBuffer(1, BuffLow, INDICATOR_DATA);
       SetIndexBuffer(2, BuffArrow, INDICATOR_DATA);
 
-      // Cài đặt hiển thị: Đường Kháng cự (Đỏ)
+      // Ressistance buffer: red line
       PlotIndexSetInteger(0, PLOT_DRAW_TYPE, DRAW_LINE);
       PlotIndexSetInteger(0, PLOT_LINE_COLOR, clrRed);
       PlotIndexSetInteger(0, PLOT_LINE_WIDTH, 2);
       PlotIndexSetString(0, PLOT_LABEL, "Resistance");
 
-      // Cài đặt hiển thị: Đường Hỗ trợ (Xanh dương)
+      // Support buffer: blue line
       PlotIndexSetInteger(1, PLOT_DRAW_TYPE, DRAW_LINE);
       PlotIndexSetInteger(1, PLOT_LINE_COLOR, clrDodgerBlue);
       PlotIndexSetInteger(1, PLOT_LINE_WIDTH, 2);
       PlotIndexSetString(1, PLOT_LABEL, "Support");
 
-      // Cài đặt hiển thị: Mũi tên Mua (Xanh lá)
+      // Arrow buffer: buy signal
       PlotIndexSetInteger(2, PLOT_DRAW_TYPE, DRAW_ARROW);
-      PlotIndexSetInteger(2, PLOT_ARROW, 233); // Mã mũi tên lên
+      PlotIndexSetInteger(2, PLOT_ARROW, 233); 
       PlotIndexSetInteger(2, PLOT_LINE_COLOR, clrLime);
       PlotIndexSetInteger(2, PLOT_LINE_WIDTH, 3);
-      PlotIndexSetDouble(2, PLOT_EMPTY_VALUE, 0.0); // Giá trị rỗng không vẽ
+      PlotIndexSetDouble(2, PLOT_EMPTY_VALUE, 0.0); 
    }
 
-   // Hàm vẽ chữ % lợi nhuận
+   // Return
    void DrawProfitLabel(int index, datetime time, double price, double percent) {
       string obj_name = "Profit_" + TimeToString(time);
       ObjectDelete(0, obj_name);

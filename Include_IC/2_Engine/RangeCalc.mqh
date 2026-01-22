@@ -1,6 +1,6 @@
 // File: Include_IC\2_Engine\RangeCalc.mqh
 
-// QUAN TRỌNG: Dùng .. để lùi ra thư mục cha (Include_IC)
+// Warnings: Use .. to return to the previous folder (Include_IC)
 #include "..\1_Inputs\RangeDefines.mqh"
 
 class CRangeEngine {
@@ -17,30 +17,30 @@ public:
                   const double &high[], 
                   const double &low[],
                   const double &close[],
-                  double &out_high[],   // Buffer vẽ Kháng cự
-                  double &out_low[],    // Buffer vẽ Hỗ trợ
-                  SignalResult &result) // Trả về kết quả
+                  double &out_high[],   // Buffer to draw Resistance
+                  double &out_low[],    // Buffer to draw Support
+                  SignalResult &result) // Return Signal
    {
-      // 1. Tối ưu hóa tính toán
+      // 1. Calculate starting index
       int start_idx = prev_calculated - 1;
       if(start_idx < m_settings.period) start_idx = m_settings.period;
 
-      // 2. Vòng lặp tính đường bao (Donchian Channel logic)
+      // 2. Donchian Channel logic
       for(int i = start_idx; i < rates_total; i++) {
-         // Tìm đỉnh cao nhất N nến trước
+         // Find highest N candels before
          int highest_idx = iHighest(NULL, 0, MODE_HIGH, m_settings.period, i - m_settings.period);
-         // Tìm đáy thấp nhất N nến trước
+         // Find lowest N candles before
          int lowest_idx  = iLowest(NULL, 0, MODE_LOW, m_settings.period, i - m_settings.period);
 
          out_high[i] = high[highest_idx]; // Resistance
          out_low[i]  = low[lowest_idx];   // Support
       }
 
-      // 3. Logic tìm điểm Mua (Tại nến vừa đóng cửa)
+      // 3. Logic find Buy Signal
       int i = rates_total - 2; 
       result.is_buy = false;
 
-      // Logic: Giá Low chạm vào vùng Hỗ Trợ cũ -> Kỳ vọng bật lên
+      // Logic: low price touch support line => Buy Signal
       if (low[i] <= out_low[i] + _Point * 5) { 
          result.is_buy = true;
          result.entry_price = close[i];

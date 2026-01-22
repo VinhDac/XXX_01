@@ -1,6 +1,6 @@
 // File: Include_IC\4_App\RangeApp.mqh
 
-// Include đủ 3 thành phần (Inputs, Engine, View)
+// Include (Inputs, Engine, View)
 #include "..\1_Inputs\RangeDefines.mqh"
 #include "..\2_Engine\RangeCalc.mqh"
 #include "..\3_View\RangeRenderer.mqh"
@@ -25,22 +25,22 @@ public:
       
       SignalResult res;
       
-      // 1. Gọi Engine tính toán
+      // 1. call Engine Calculate
       m_engine.Calculate(rates_total, prev_calculated, high, low, close, 
                          m_view.BuffHigh, m_view.BuffLow, res);
 
-      // 2. Xử lý hiển thị tín hiệu (nến rates_total - 2)
+      // 2.Deal with Signal Result & call View to draw
       int i = rates_total - 2;
-      m_view.BuffArrow[i] = 0.0; // Reset giá trị cũ
+      m_view.BuffArrow[i] = 0.0; 
 
       if(res.is_buy) {
-         // Vẽ mũi tên ngay dưới đáy nến
+       
          m_view.BuffArrow[i] = low[i] - _Point * 10;
          
-         // Vẽ text % lợi nhuận
+  
          m_view.DrawProfitLabel(i, time[i], low[i] - _Point * 30, res.potential_percent);
          
-         Print("MUA TẠI HỖ TRỢ! Giá: ", res.entry_price, " -> Target: ", res.target_price);
+         Print("BUY SIGNAL: Price", res.entry_price, " -> Target: ", res.target_price);
       }
       
       return(rates_total);
