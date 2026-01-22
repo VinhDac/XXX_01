@@ -1,29 +1,39 @@
-//+------------------------------------------------------------------+
-//|                                                       XXX_01.mq5 |
-//|                                  Copyright 2026, MetaQuotes Ltd. |
-//|                                             https://www.mql5.com |
-//+------------------------------------------------------------------+
-//+------------------------------------------------------------------+
-//| Custom indicator initialization function                         |
-//+------------------------------------------------------------------+
-int OnInit()
-  {
-//--- indicator buffers mapping
+#property copyright "Team Dev Range"
+#property indicator_chart_window
+#property indicator_buffers 3
+#property indicator_plots   3
+
+// Include file App (Lưu ý đường dẫn vào folder 4_App)
+#include "Include_IC\4_App\RangeApp.mqh"
+
+// --- INPUTS ---
+input int InpPeriod = 20; // Chu kỳ Range
+
+// --- OBJECT ---
+CRangeApp app;
+
+int OnInit() {
+   RangeSettings settings;
+   settings.period = InpPeriod;
    
-//---
+   app.Initialize(settings);
    return(INIT_SUCCEEDED);
-  }
-//+------------------------------------------------------------------+
-//| Custom indicator iteration function                              |
-//+------------------------------------------------------------------+
-int OnCalculate(const int32_t rates_total,
-                const int32_t prev_calculated,
-                const int32_t begin,
-                const double &price[])
-  {
-//---
+}
+
+int OnCalculate(const int rates_total,
+                const int prev_calculated,
+                const datetime &time[],
+                const double &open[],
+                const double &high[],
+                const double &low[],
+                const double &close[],
+                const long &tick_volume[],
+                const long &volume[],
+                const int &spread[]) {
    
-//--- return value of prev_calculated for next call
-   return(rates_total);
-  }
-//+------------------------------------------------------------------helloworld+
+   return app.OnCalculate(rates_total, prev_calculated, time, high, low, close);
+}
+
+void OnDeinit(const int reason) {
+   ObjectsDeleteAll(0, "Profit_");
+}
