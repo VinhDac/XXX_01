@@ -1,65 +1,44 @@
-================================================================================
-STRATEGY: HIGH PRICE REJECTION & RETURN TO BALANCE
-================================================================================
+# Trading Setup: False Breakout & Range Rotation
 
-1. CONCEPT OVERVIEW
---------------------------------------------------------------------------------
-When the market attempts to break a high price level but fails (False Breakout),
-buying pressure exhausts and sellers take control, pushing the price back into 
-the previous equilibrium range.
-This strategy capitalizes on the "Bounce" at the old Support level to go Long.
+## 1. Context
+Market rejects higher prices (Resistance) and rotates back into the previous balance area.
+* **The Trap:** Price breaks Resistance, fails to hold, and falls back inside ("Bull Trap").
+* **The Destination:** Price seeks the lower boundary (Support).
 
-2. PRICE ACTION SCENARIO
---------------------------------------------------------------------------------
-Step 1: Price rallies above the Resistance Zone.
-Step 2: Price fails to hold the high and drops sharply back below Resistance
-        (This is a "False Breakout" or "Fakeout").
-Step 3: Price falls freely, seeking the old Support Zone.
-Step 4: At Support, price stabilizes and shows signs of a bounce -> BUY OPPORTUNITY.
+---
 
-3. TRADING PLAN
---------------------------------------------------------------------------------
-- Position:            LONG (BUY)
-- Entry Point:         At the Support Zone
-- Take Profit (TP):    Just below the Resistance Zone
-- Stop Loss (SL):      Just below the Support Zone (approx. 1-2% buffer)
+## 2. Execution Plan
 
-4. VISUALIZATION
---------------------------------------------------------------------------------
+### 🎯 Strategy: Buy the Bounce
+Capitalize on the return to value. Buy at Support, anticipating a move back to Resistance.
 
-Price ($)
-    ^
-    |          (False Breakout / Fakeout)
-    |                __/\__  <-- High Price Rejection
-    |               /      \
-R   |==============/========\================= RESISTANCE ZONE ============= [TAKE PROFIT HERE]
-    |             /          \                      ^
-    |            /            \                     |
-    |           /              \                    | (Profit Potential: ~X%)
-    |          /                \                   |
-    |         /                  \                  |
-S   |========/====================\============= SUPPORT ZONE ==============
-    |      Ok                     Ok  <-- [BUY HERE] 
-    |    (Old)                   (New)     (Expect Bounce)
-    |
-    --------------------------------------------------------------------> Time
+| Component | Action | Logic |
+| :--- | :--- | :--- |
+| **🟢 ENTRY** | **At Support** | Wait for reaction (Pinbar/Green candle). |
+| **🔴 STOP LOSS** | **Below Support** | If Support breaks, the thesis is invalid. |
+| **🏁 TAKE PROFIT** | **Below Resistance** | Exit before sellers step in again. |
 
-5. PROFIT EXAMPLE
---------------------------------------------------------------------------------
-Assumptions:
-- Support Zone:      $100
-- Resistance Zone:   $110
+---
 
-> ENTRY ORDER (LIMIT/MARKET): At $100
-> TAKE PROFIT (TP):           At $109 (Just under resistance for safety)
-> STOP LOSS (SL):             At $98  (Below support)
+## 3. Visualization
 
--> Estimated Profit:      ($109 - $100) / $100 = 9%
--> Risk:Reward Ratio:     Risking $2 to gain $9 (Ratio 1:4.5)
+```mermaid
+graph TD
+    %% Nodes
+    RES[("🛑 Resistance Zone")]
+    SUP[("✅ Support Zone")]
+    
+    %% Flow
+    Start(Price in Range) -->|Breakout| Fake(False Breakout / Bull Trap)
+    Fake -->|Rejection| Return(Falls back into Range)
+    Return -->|Drops to| BuyZone{BUY ZONE}
+    
+    %% Action
+    BuyZone -->|🟢 Entry: Long| Bounce(Price Bounces)
+    Bounce -->|Profit Run| TP(🏁 TP: Target Resistance)
 
-================================================================================
-NOTES:
-- Only enter the trade if you see a reversal candlestick pattern (e.g., Pinbar, 
-  Engulfing) at the Support level.
-- If price breaks cleanly below Support (Breakdown), cancel the trade idea.
-================================================================================
+    %% Styling
+    style RES fill:#ff9999,stroke:#333
+    style SUP fill:#99ff99,stroke:#333
+    style BuyZone fill:#ccffcc,stroke:#090,stroke-width:4px
+    style Fake fill:#ffcccc,stroke:#f00,stroke-dasharray: 5 5
