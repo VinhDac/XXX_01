@@ -26,4 +26,4 @@ int OnCalculate(const int32_t rates_total,
 //--- return value of prev_calculated for next call
    return(rates_total);
   }
-//+------------------------------------------------------------------+
+//+------------------------------------------------------------------helloworld+
