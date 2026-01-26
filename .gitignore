@@ -1,0 +1,13 @@
+# Compiled output
+*.ex5
+
+# Logs/temp
+*.log
+*.tmp
+
+# OS/editor
+Thumbs.db
+.DS_Store
+.vscode/*
+!.vscode/tasks.json
+!.vscode/settings.json
