@@ -37,3 +37,6 @@ int OnCalculate(const int rates_total,
 void OnDeinit(const int reason) {
    ObjectsDeleteAll(0, "Profit_");
 }
+
+
+//hello
